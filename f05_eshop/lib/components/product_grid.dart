@@ -1,9 +1,9 @@
-import 'package:f05_eshop/components/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model/product.dart';
 import '../model/product_list.dart';
+import 'product_item.dart';
 
 class ProductGrid extends StatelessWidget {
   final bool _showOnlyFavoritos;
@@ -25,7 +25,7 @@ class ProductGrid extends StatelessWidget {
         //child: ProductItem(product: loadedProducts[i]),
         child: ProductItem(),
       ),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, //2 produtos por linha
         childAspectRatio: 3 / 2, //diemnsao de cada elemento
         crossAxisSpacing: 10,

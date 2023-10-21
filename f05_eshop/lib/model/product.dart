@@ -6,6 +6,7 @@ class Product with ChangeNotifier {
   final String description;
   final double price;
   final String imageUrl;
+  int quantity;
   bool isFavorite;
 
   Product({
@@ -15,10 +16,22 @@ class Product with ChangeNotifier {
     required this.price,
     required this.imageUrl,
     this.isFavorite = false,
+    this.quantity = 0,
   });
 
-  void toggleFavorite() {
+  Future<void> toggleFavorite() async {
     isFavorite = !isFavorite;
     notifyListeners();
+  }
+
+  factory Product.fromJson(String id, Map<String, dynamic> json) {
+    return Product(
+        id: id,
+        title: json['title'],
+        description: json['description'],
+        price: json['price'],
+        imageUrl: json['imageUrl'],
+        quantity: json['quantity'],
+        isFavorite: json['isFavorite']);
   }
 }
