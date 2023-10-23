@@ -1,5 +1,10 @@
 import '../model/product.dart';
 
+//https://st.depositphotos.com/1000459/2436/i/950/depositphotos_24366251-stock-photo-soccer-ball.jpg
+//https://st2.depositphotos.com/3840453/7446/i/600/depositphotos_74466141-stock-photo-laptop-on-table-on-office.jpg
+//https://st2.depositphotos.com/3539679/7265/v/600/depositphotos_72651811-stock-illustration-tennis-racket-and-ball.jpg
+//https://st.depositphotos.com/2575873/4824/i/600/depositphotos_48243251-stock-illustration-six-stringed-electric-guitar-isolated.jpg
+
 final dummyProducts = [
   Product(
     id: 'p1',

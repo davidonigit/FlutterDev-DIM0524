@@ -64,10 +64,6 @@ class ProductTile extends StatelessWidget {
                             : Icons.favorite_border,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.edit),
-                    ),
                   ],
                 ),
               ],

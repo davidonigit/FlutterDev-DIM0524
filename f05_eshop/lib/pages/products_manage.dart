@@ -1,3 +1,4 @@
+import 'package:f05_eshop/components/manage_tile.dart';
 import 'package:f05_eshop/model/cart.dart';
 import 'package:f05_eshop/model/product_list.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +13,12 @@ enum FilterOptions {
   All,
 }
 
-class ProductsPage extends StatefulWidget {
+class ProductsManage extends StatefulWidget {
   @override
-  State<ProductsPage> createState() => _ProductsPageState();
+  State<ProductsManage> createState() => _ProductsManageState();
 }
 
-class _ProductsPageState extends State<ProductsPage> {
+class _ProductsManageState extends State<ProductsManage> {
   bool _showOnlyFavorites = false;
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _ProductsPageState extends State<ProductsPage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
               appBar: AppBar(
-                title: Text('Minha Loja'),
+                title: Text('Gerenciar Produtos'),
               ),
               body: CircularProgressIndicator());
         } else if (snapshot.hasError) {
@@ -49,44 +50,15 @@ class _ProductsPageState extends State<ProductsPage> {
           final products = snapshot.data;
           return Scaffold(
               appBar: AppBar(
-                title: Text('Minha Loja'),
+                title: Text('Gerenciar Produtos'),
                 actions: [
                   IconButton(
                       onPressed: () {
                         Navigator.of(context).pushNamed(
-                          AppRoutes.PRODUCTS_MANAGE,
+                          AppRoutes.PRODUCT_FORM,
                         );
                       },
-                      icon: Icon(Icons.settings)),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(
-                          AppRoutes.CART_PAGE,
-                        );
-                      },
-                      icon: Icon(Icons.shopping_cart)),
-                  PopupMenuButton(
-                    icon: Icon(Icons.more_vert),
-                    itemBuilder: (_) => [
-                      PopupMenuItem(
-                        child: Text('Somente Favoritos'),
-                        value: FilterOptions.Favorite,
-                      ),
-                      PopupMenuItem(
-                        child: Text('Todos'),
-                        value: FilterOptions.All,
-                      ),
-                    ],
-                    onSelected: (FilterOptions selectedValue) {
-                      setState(() {
-                        if (selectedValue == FilterOptions.Favorite) {
-                          _showOnlyFavorites = true;
-                        } else {
-                          _showOnlyFavorites = false;
-                        }
-                      });
-                    },
-                  ),
+                      icon: Icon(Icons.add)),
                 ],
               ),
               body: ListView.builder(
@@ -95,7 +67,7 @@ class _ProductsPageState extends State<ProductsPage> {
                   final product = products[index];
                   if ((_showOnlyFavorites && product.isFavorite) ||
                       !_showOnlyFavorites) {
-                    return ProductTile(product);
+                    return ManageTile(product);
                   } else {
                     return Container();
                   }

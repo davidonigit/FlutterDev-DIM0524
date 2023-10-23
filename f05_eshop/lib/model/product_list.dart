@@ -9,9 +9,6 @@ import 'package:http/http.dart' as http;
 class ProductList with ChangeNotifier {
   final _baseUrl = 'https://miniprojeto4-flutter-default-rtdb.firebaseio.com/';
 
-  //https://st.depositphotos.com/1000459/2436/i/950/depositphotos_24366251-stock-photo-soccer-ball.jpg
-  //https://st2.depositphotos.com/3840453/7446/i/600/depositphotos_74466141-stock-photo-laptop-on-table-on-office.jpg
-
   List<Product> _items = [];
 
   bool _showFavoriteOnly = false;
