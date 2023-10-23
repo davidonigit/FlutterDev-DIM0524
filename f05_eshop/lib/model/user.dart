@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class User with ChangeNotifier {
   final String id;

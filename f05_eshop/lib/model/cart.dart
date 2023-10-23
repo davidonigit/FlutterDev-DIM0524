@@ -4,11 +4,12 @@ import 'package:f05_eshop/model/product.dart';
 import 'package:f05_eshop/model/product_list.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'order.dart';
+import 'user.dart';
 
 class CartModel extends ChangeNotifier {
   final _baseUrl = 'https://miniprojeto4-flutter-default-rtdb.firebaseio.com/';
   List<Product> _cartProducts = [];
-  final Map<String, int> _itemQuantity = {};
 
   List<Product> get cartProducts => _cartProducts;
 
@@ -95,6 +96,28 @@ class CartModel extends ChangeNotifier {
     final response = await http.delete(
       Uri.parse(
           'https://miniprojeto4-flutter-default-rtdb.firebaseio.com/cart/${product.id}.json'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    notifyListeners();
+  }
+
+  Future<void> addOrder(String userId, double price) async {
+    // final future = http.post(Uri.parse('$_baseUrl/$userId/orders.json'),
+    //     body: jsonEncode({
+    //       "products": order.products,
+    //       "totalValue": order.totalValue,
+    //       "orderDate": order.orderDate,
+    //     }));
+    final future = http.post(Uri.parse('$_baseUrl/orders.json'),
+        body: jsonEncode({
+          "user": userId,
+          "price": price,
+        }));
+    final response = await http.delete(
+      Uri.parse(
+          'https://miniprojeto4-flutter-default-rtdb.firebaseio.com/cart.json'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

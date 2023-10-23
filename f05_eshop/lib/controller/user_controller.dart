@@ -1,9 +1,10 @@
-import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
-import 'package:http/http.dart' as http;
+class UserController with ChangeNotifier {
+  String userId = '';
 
-class UserController {
-  UserController();
-
-  Future<void> addUser() async {}
+  void setUserId(String id) {
+    userId = id;
+    notifyListeners();
+  }
 }

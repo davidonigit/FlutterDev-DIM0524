@@ -1,5 +1,7 @@
+import 'package:f05_eshop/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'dart:convert';
 import '../model/user.dart';
 import '../utils/app_routes.dart';
@@ -49,7 +51,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   autentication(List<User> users, String name, String password) {
-    bool exists = users.any((p) => p.name == name && p.password == password);
+    final userController = Provider.of<UserController>(context, listen: false);
+    bool exists = users.any((u) => u.name == name && u.password == password);
+    if (exists) {
+      User user =
+          users.singleWhere((u) => u.name == name && u.password == password);
+      userController.setUserId(user.id);
+    }
     return exists;
   }
 

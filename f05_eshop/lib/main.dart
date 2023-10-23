@@ -11,6 +11,7 @@ import 'package:f05_eshop/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'controller/user_controller.dart';
 import 'model/product_list.dart';
 import 'pages/products_manage.dart';
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => ProductList()),
         ChangeNotifierProvider(create: (context) => CartModel()),
+        ChangeNotifierProvider(create: (context) => UserController()),
       ],
       child: MaterialApp(
         title: 'Minha Loja',

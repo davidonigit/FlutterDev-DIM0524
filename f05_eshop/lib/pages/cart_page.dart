@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:f05_eshop/components/cart_tile.dart';
+import 'package:f05_eshop/controller/user_controller.dart';
 import 'package:f05_eshop/model/cart.dart';
 import 'package:f05_eshop/model/product_list.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,16 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartModel>(context);
+    final userController = Provider.of<UserController>(context);
+
+    void _makeOrder() {
+      // Order order = Order(
+      //     id: Random().nextDouble().toString(),
+      //     products: cart.cartProducts,
+      //     totalValue: cart.totalPrice,
+      //     orderDate: DateTime.now());
+      // cart.addOrder(userController.userId, order);
+    }
 
     return FutureBuilder<List<Product>>(
       future: cart
@@ -74,7 +87,13 @@ class _CartPageState extends State<CartPage> {
                   Text(
                     'Total ${cart.totalPrice}',
                     style: TextStyle(fontSize: 20),
-                  )
+                  ),
+                  Divider(),
+                  ElevatedButton(
+                      onPressed: () {
+                        cart.addOrder(userController.userId, cart.totalPrice);
+                      },
+                      child: Text('Fazer Pedido'))
                 ],
               ));
         }

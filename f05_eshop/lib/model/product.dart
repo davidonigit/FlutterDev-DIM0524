@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class Product with ChangeNotifier {
+class Product {
   final String id;
   final String title;
   final String description;
@@ -21,7 +21,17 @@ class Product with ChangeNotifier {
 
   Future<void> toggleFavorite() async {
     isFavorite = !isFavorite;
-    notifyListeners();
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'price': price,
+      'imageUrl': imageUrl,
+      'quantity': quantity,
+      'isFavorite': isFavorite,
+    };
   }
 
   factory Product.fromJson(String id, Map<String, dynamic> json) {
