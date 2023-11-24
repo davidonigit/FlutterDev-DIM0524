@@ -7,12 +7,24 @@ import '../screens/map_screen.dart';
 import '../utils/location_util.dart';
 
 class LocationInput extends StatefulWidget {
+  final double? latitude;
+  final double? longitude;
+
+  LocationInput({this.latitude, this.longitude});
+
   @override
   _LocationInputState createState() => _LocationInputState();
 }
 
 class _LocationInputState extends State<LocationInput> {
   String? _previewImageUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _previewImageUrl = LocationUtil.generateLocationPreviewImage(
+        latitude: widget.latitude, longitude: widget.longitude);
+  }
 
   Future<void> _getCurrentUserLocation() async {
     final locData =
@@ -44,6 +56,10 @@ class _LocationInputState extends State<LocationInput> {
 
     print(selectedPosition.latitude);
     print(selectedPosition.longitude);
+    Provider.of<GreatPlaces>(context, listen: false).latitude =
+        selectedPosition.latitude;
+    Provider.of<GreatPlaces>(context, listen: false).longitude =
+        selectedPosition.longitude;
 
     final staticMapImageUrl = LocationUtil.generateLocationPreviewImage(
         latitude: selectedPosition.latitude,

@@ -87,8 +87,8 @@ class _PlaceFormScreenState extends State<PlaceFormScreen> {
             icon: Icon(Icons.add),
             label: Text('Adicionar'),
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).colorScheme.secondary,
-              onPrimary: Colors.black,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              foregroundColor: Colors.black,
               elevation: 0,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),

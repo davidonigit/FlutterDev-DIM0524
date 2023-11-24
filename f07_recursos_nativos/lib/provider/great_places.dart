@@ -64,15 +64,35 @@ class GreatPlaces with ChangeNotifier {
       'address': newPlace.location!.address,
       'numero': newPlace.numero
     });
-    print('newPlace!!! - ${newPlace.title}');
-    print('newPlace address${newPlace.location!.address}');
-    print('newPlace numero ${newPlace.numero}');
+    notifyListeners();
+  }
+
+  void updatePlace(String id, Place place) {
+    final index = _items.indexWhere((place) => place.id == id);
+    _items[index] = place;
+
+    DbUtil.update('places', id, {
+      'title': place.title,
+      'image': place.image.path,
+      'latitude': place.location!.latitude,
+      'longitude': place.location!.longitude,
+      'address': place.location!.address,
+      'numero': place.numero
+    });
+
+    notifyListeners();
+  }
+
+  void deletePlace(String id) {
+    final index = _items.indexWhere((place) => place.id == id);
+    _items.removeAt(index);
+
+    DbUtil.delete('places', id);
     notifyListeners();
   }
 
   Future<String> getAddressFromLatLng(double lat, double lng) async {
-    final apiKey =
-        'AIzaSyBMoR2hFCb4Hhq4KqqZdmzNaO4zbwoezcU'; // Substitua com sua chave de API do Google Maps
+    final apiKey = 'AIzaSyBMoR2hFCb4Hhq4KqqZdmzNaO4zbwoezcU';
     final apiUrl =
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey';
 
