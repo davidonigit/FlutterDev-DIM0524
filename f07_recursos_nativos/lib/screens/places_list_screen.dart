@@ -3,11 +3,24 @@ import 'dart:io';
 import 'package:f07_recursos_nativos/screens/place_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../provider/great_places.dart';
 import '../utils/app_routes.dart';
+import '../utils/autenticacao_service.dart';
 
-class PlacesListScreen extends StatelessWidget {
+class PlacesListScreen extends StatefulWidget {
+  @override
+  State<PlacesListScreen> createState() => _PlacesListScreenState();
+}
+
+class _PlacesListScreenState extends State<PlacesListScreen> {
+  final AutenticacaoService _serviceAuthentication = AutenticacaoService();
+  @override
+  void initState() {
+    final User? user = _serviceAuthentication.getCurrentUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +32,13 @@ class PlacesListScreen extends StatelessWidget {
               Navigator.of(context).pushNamed(AppRoutes.PLACE_FORM);
             },
             icon: Icon(Icons.add),
-          )
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutes.PROFILE_SCREEN);
+            },
+            icon: Icon(Icons.manage_accounts),
+          ),
         ],
       ),
       body: FutureBuilder(

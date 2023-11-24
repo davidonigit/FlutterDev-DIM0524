@@ -58,7 +58,7 @@ class _UpdatePlaceScreenState extends State<UpdatePlaceScreen> {
     provider.updatePlace(newPlace.id, newPlace);
     provider.latitude = null;
     provider.longitude = null;
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => PlaceDetailsScreen(place: newPlace),

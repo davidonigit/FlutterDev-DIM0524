@@ -78,7 +78,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   widget.place.location!.latitude;
               Provider.of<GreatPlaces>(context, listen: false).longitude =
                   widget.place.location!.longitude;
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => UpdatePlaceScreen(place: widget.place),
